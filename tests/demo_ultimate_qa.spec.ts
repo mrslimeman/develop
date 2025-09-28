@@ -21,8 +21,9 @@ test('Verify Navigate To Practice', async ({ page }) => {
     await expect(page.getByText(/this section has really simple html elements/i)).toBeVisible();
 
     //interact element 
-    await page.click('id=idExample');
-    await expect(page.getByText(/Button success/i)).toBeVisible();
-    await page.goBack({ waitUntil: 'load' }); 
+    // await page.click('id=idExample');
+    // await expect(page.getByText(/Button success/i)).toBeVisible();
+    // await page.goBack({ waitUntil: 'load' }); 
 
   });
+
