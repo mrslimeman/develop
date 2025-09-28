@@ -26,3 +26,8 @@ test('Verify Navigate To Practice', async ({ page }) => {
     await page.goBack({ waitUntil: 'load' }); 
 
   });
+
+  test('Verify', async ({ page }) => {
+    await page.goto('https://ultimateqa.com/automation/');
+    await expect(page).toHaveTitle(/Automation Practice/);
+  });
