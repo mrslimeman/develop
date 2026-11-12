@@ -1,0 +1,17 @@
+common_url:
+  baseUrl: 'https://www.saucedemo.com/'
+  cartUrl: 'cart.html'
+  inventoryUrl: 'inventory.html'
+
+user_credentials:
+  std_username: 'standard_user'
+  locked_username: 'locked_out_user'
+  problem_username: 'problem_user'
+  performance_username: 'performance_glitch_user'
+  error_username: 'error_user'
+  visual_username: 'visual_user'
+  main_password: 'secret_sauce'
+
+product_item:
+  product_backpack: 'Sauce Labs Backpack'
+  product_jacket: 'Sauce Labs Fleece Jacket'

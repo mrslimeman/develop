@@ -2,13 +2,19 @@
   "name": "playwright-demo",
   "version": "1.0.0",
   "main": "index.js",
-  "scripts": {},
+  "scripts": {
+    "test:ui": "playwright test saucedemo --ui"
+  },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "@playwright/test": "^1.55.0",
-    "@types/node": "^24.5.2"
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^24.19.2"
+  },
+  "dependencies": {
+    "js-yaml": "^5.5.0"
   }
 }

@@ -1,0 +1,10 @@
+login_wording:
+  login_title: 'Swag Labs'
+  login_err_user_not_exist: 'Username and password do not match any user in this service'
+  login_err_username_required: 'Username is required'
+  login_err_password_required: 'Password is required'
+  login_err_lockout_user: 'Sorry, this user has been locked out.'
+
+inventory_wording:
+  inventory_cart: 'Your Cart'
+
