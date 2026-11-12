@@ -1,6 +1,5 @@
 import { Page ,test ,expect } from '@playwright/test';
-import { loginPage, TestData, assertion ,CommonWording ,inventoryPage } from '../../resource/allreource';
-import { cartPage } from '../../pages/cart.page';
+import { loginPage, TestData, assertion ,CommonWording ,inventoryPage, cartPage } from '../../resource/allreource';
 
 
 

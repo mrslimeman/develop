@@ -32,13 +32,12 @@ export const cartPage = {
 
     },
 
-    async findItemAndRemove(page: Page, product: string, ) {
+    async findItemAndRemove(page: Page, product: string) {
 
        const targetItem = page.locator('.cart_item').filter({ has: page.locator('.inventory_item_name', { hasText: product })})
-       const itemName = await page.locator('.cart_item .inventory_item_name').allTextContents()
-       
+
        await targetItem.getByRole('button', { name: 'Remove' }).click();
-       expect(itemName).not.toContain(product); 
+       await expect(targetItem).toHaveCount(0);
 
     },
 

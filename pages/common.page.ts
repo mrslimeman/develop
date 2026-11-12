@@ -14,7 +14,7 @@ export const commonPage = {
 
     async clickElement(page: Page, locator: string){
 
-        await page.locator(locator).isVisible();
+        await expect(page.locator(locator)).toBeVisible();
         await page.locator(locator).click();
 
     }

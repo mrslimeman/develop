@@ -13,5 +13,6 @@ test('GET ข้อมูล Pikachu', async ({ request }) => {
   expect(body.id).toBe(25);
 
   // ตรวจว่ามีธาตุไฟฟ้า (electric)
-  expect(body.types[0].type.name).toBe('electric');
+  const typeNames = body.types.map((t: { type: { name: string } }) => t.type.name);
+  expect(typeNames).toContain('electric');
 });

@@ -14,8 +14,8 @@ export function loadYamlData(filePath: string) {
 }
 
 // โหลดข้อมูลเตรียมไว้สำหรับ Export ไปใช้
-const testDataPath = 'E:\\Workspaces\\playwright\\develop\\constants\\commondata.yml';
+const testDataPath = path.join('constants', 'commondata.yml');
 export const TestData = loadYamlData(testDataPath);
 
-const commonWordingPath = 'constants\\commonwording.yml'
+const commonWordingPath = path.join('constants', 'commonwording.yml');
 export const CommonWording = loadYamlData(commonWordingPath)
