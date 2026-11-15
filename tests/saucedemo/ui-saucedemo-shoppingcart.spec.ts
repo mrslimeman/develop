@@ -16,7 +16,7 @@ test.describe('Test Suite - Shopping Cart', () => {
     const itemBackPack: string = TestData.product_item.product_backpack;
     const itemJacket: string = TestData.product_item.product_jacket;
 
-    test('Validate Add item to cart', async ({ page }) => {
+    test('Validate Add item to cart And Check Out Success', async ({ page }) => {
 
         let backPackPrice = 0;
 
