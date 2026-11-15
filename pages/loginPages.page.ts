@@ -9,8 +9,8 @@ export const loginPage = {
         await commonPage.navigateToUrl(page, TestData.common_url.baseUrl);
         await expect(page).toHaveTitle(CommonWording.login_wording.login_title);
 
-        await commonPage.fillByTestID(page, '[data-test="username"]', username)
-        await commonPage.fillByTestID(page, '[data-test="password"]', password)
+        await commonPage.clearAndFill(page, '[data-test="username"]', username)
+        await commonPage.clearAndFill(page, '[data-test="password"]', password)
         await commonPage.clickElement(page, '[data-test="login-button"]');
     },
 

@@ -2,6 +2,9 @@ common_url:
   baseUrl: 'https://www.saucedemo.com/'
   cartUrl: 'cart.html'
   inventoryUrl: 'inventory.html'
+  checkoutUrl_information: 'checkout-step-one.html'
+  checkoutUrl_overview: 'checkout-step-two.html'
+  checkoutUrl_complete: 'checkout-complete.html'
 
 user_credentials:
   std_username: 'standard_user'
@@ -15,3 +18,9 @@ user_credentials:
 product_item:
   product_backpack: 'Sauce Labs Backpack'
   product_jacket: 'Sauce Labs Fleece Jacket'
+
+
+test_userinfo_demo:
+  firstname: 'tester'
+  lastname: 'saucedemo'
+  zipcode: '10400'

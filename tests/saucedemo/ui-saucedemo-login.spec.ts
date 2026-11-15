@@ -1,9 +1,6 @@
 import { Page ,test ,expect } from '@playwright/test';
 import { loginPage, TestData, assertion ,CommonWording } from '../../resource/allreource';
 
-
-
-
 test.describe('Test Suite - Login Fail', () => {
 
     test('Validate Login-fail user not exist', async ({ page }, testInfo) => {

@@ -14,7 +14,7 @@ export function loadYamlData(filePath: string) {
 }
 
 // โหลดข้อมูลเตรียมไว้สำหรับ Export ไปใช้
-const testDataPath = path.join('constants', 'commondata.yml');
+const testDataPath = path.join('constants', 'testdata.yml');
 export const TestData = loadYamlData(testDataPath);
 
 const commonWordingPath = path.join('constants', 'commonwording.yml');

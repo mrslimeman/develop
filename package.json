@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "test:ui": "playwright test saucedemo --ui"
+    "test:ui": "playwright test saucedemo --ui",
+    "test:noui": "playwright test --project=chromium --workers=2",
+    "test:report": "playwright test --project=chromium --headed && playwright show-report",
+    "test:lastfail": "playwright test --last-failed --project=chromium --workers=2"
   },
   "keywords": [],
   "author": "",

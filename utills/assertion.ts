@@ -18,5 +18,32 @@ export const assertion = {
     await expect(page).toHaveURL(targetUrl);
 
   },
-  
+
+  async isVisibled(page: any, locator: string) {
+
+    const target = page.locator(locator)
+    await expect(target).toBeVisible();
+
+  },
+
+  async isNotVisibled(page: any, locator: Locator) {
+
+    const target = page.locator(locator)
+    await expect(target).not.toBeVisible();
+
+  },
+
+  async hasText(page: any, locator: string, expected: string) {
+
+    await expect((page.locator(locator))).toHaveText(expected);
+
+  },
+
+  async hasNoText(page: any, locator: string, expected: string) {
+
+    await expect((page.locator(locator))).not.toHaveText(expected);
+    
+  },
+
+
 }

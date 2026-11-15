@@ -1,3 +1,8 @@
+common_wording:
+  txt_continue: Continue
+  txt_cancel: Cancel
+
+
 login_wording:
   login_title: 'Swag Labs'
   login_err_user_not_exist: 'Username and password do not match any user in this service'
@@ -7,4 +12,12 @@ login_wording:
 
 inventory_wording:
   inventory_cart: 'Your Cart'
+
+checkout_wording:
+  checkout_title: 'Checkout: Your Information'
+  checkout_overview: 'Checkout: Overview'
+  checkout_complete: 'Checkout: Complete!'
+  txt_success_msg: 'Thank you for your order!'
+  txt_success_desc: 'Your order has been dispatched, and will arrive just as fast as the pony can get there!'
+
 

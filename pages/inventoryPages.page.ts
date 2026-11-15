@@ -1,5 +1,5 @@
 import { Page ,expect } from '@playwright/test';
-import { commonPage, CommonWording} from '../resource/allreource';
+import { commonPage, TestData} from '../resource/allreource';
 
 export const inventoryPage = {
 
@@ -23,5 +23,13 @@ export const inventoryPage = {
         await commonPage.clickElement(page, '[data-test="shopping-cart-link"]')
 
     },
+
+    async addToCart(page: Page) {
+
+
+        await commonPage.clickElement(page, '[data-test="shopping-cart-link"]')
+
+    },
+
 
 }

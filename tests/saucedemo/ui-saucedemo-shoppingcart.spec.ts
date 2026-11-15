@@ -1,12 +1,7 @@
 import { Page ,test ,expect } from '@playwright/test';
-import { loginPage, TestData, assertion ,CommonWording ,inventoryPage, cartPage } from '../../resource/allreource';
-
-
-
+import { loginPage, TestData, assertion ,CommonWording ,inventoryPage, cartPage, checkOutPage } from '../../resource/allreource';
 
 test.beforeEach(async ({ page }) => {
-
-    
 
     await loginPage.loginSaucedemo(page, 
         TestData.user_credentials.std_username, 
@@ -18,18 +13,19 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('Test Suite - Shopping Cart', () => {
 
+    const product_list: string[] = Object.values(TestData.product_item);
+
+    console.log(product_list)
+
+    const itemBackPack = product_list[0];
+    const itemJacket = product_list[1];
+
     test('Validate Add item to cart', async ({ page }) => {
-
-            const product_list = [
-
-                TestData.product_item.product_jacket,
-                TestData.product_item.product_backpack
-            ]
 
         await test.step('Add to Cart', async () => {
 
-            await inventoryPage.productAddToCart(page, TestData.product_item.product_backpack);
-            await inventoryPage.productAddToCart(page, TestData.product_item.product_jacket);
+            await inventoryPage.productAddToCart(page, itemBackPack);
+            await inventoryPage.productAddToCart(page, itemJacket);
             
         });
 
@@ -43,25 +39,66 @@ test.describe('Test Suite - Shopping Cart', () => {
         await test.step('Check Product Qty. and Product Name', async () => {
 
             //Check Name
-            await cartPage.itemName(page, product_list[0])
-            await cartPage.itemName(page, product_list[1])
+            await cartPage.itemName(page, itemBackPack)
+            await cartPage.itemName(page, itemJacket)
 
             //Check Quantity
-            await cartPage.itemQuantity(page, '1', product_list[0])
-            await cartPage.itemQuantity(page, '1', product_list[1])
+            await cartPage.itemQuantity(page, '1', itemBackPack)
+            await cartPage.itemQuantity(page, '1', itemJacket)
             
         });
 
         await test.step('Remove Item', async () => {
 
-            await cartPage.findItemAndRemove(page, product_list[0])
+            await cartPage.findItemAndRemove(page, itemJacket);
 
             //Check ของที่ยังอยู่
-            await cartPage.itemName(page, product_list[1])
-            
-            console.log("Item "+ product_list[0]+ " is Removes")
-            console.log("Item "+ product_list[1]+ " is Visible")
+            await cartPage.findItemAvilable(page, itemBackPack);
+
+            console.log("Item "+ itemJacket+ " is Removes");
+            console.log("Item "+ itemBackPack+ " is Visible");
+
+            await checkOutPage.clickCheckOut(page);
 
         });
+
+        await test.step('Check Out Step 1', async () => {
+
+            await checkOutPage.titleCheckoutInfo(page);
+            
+            //fill - infomation
+            await checkOutPage.inputFirstName(page, TestData.test_userinfo_demo.firstname);
+            await checkOutPage.inputLastName(page, TestData.test_userinfo_demo.lastname);
+            await checkOutPage.inputZipCode(page, TestData.test_userinfo_demo.zipcode);
+
+            await checkOutPage.clickContinue(page);
+
+        });
+
+        await test.step('Check Out Step 2', async () => {
+
+            await checkOutPage.titleCheckoutOverview(page);
+            
+            //overview - check item & quantity
+            await cartPage.itemName(page, itemBackPack);
+            await cartPage.itemQuantity(page, '1', itemBackPack);
+            await cartPage.findItemAvilable(page, itemBackPack);
+
+            //Verify Section & Total
+            await checkOutPage.verifyOverViewSection(page);
+            await checkOutPage.clickFinish(page);
+
+            //Verify Successful Page
+            await checkOutPage.verifyOrderSuccessful(page);
+
+        });
+
+        await test.step('back to home', async () => {
+
+            await checkOutPage.clickBackToHome(page)
+            await assertion.checkUrl(page, TestData.common_url.inventoryUrl);
+
+        });
+
     });
 });
