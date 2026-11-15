@@ -26,7 +26,7 @@ export const assertion = {
 
   },
 
-  async isNotVisibled(page: any, locator: Locator) {
+  async isNotVisibled(page: any, locator: string) {
 
     const target = page.locator(locator)
     await expect(target).not.toBeVisible();

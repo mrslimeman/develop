@@ -18,18 +18,12 @@ export const inventoryPage = {
 
     },
 
-    async btnGoToCart(page: Page) {
+    async goToCart(page: Page) {
 
         await commonPage.clickElement(page, '[data-test="shopping-cart-link"]')
 
     },
 
-    async addToCart(page: Page) {
-
-
-        await commonPage.clickElement(page, '[data-test="shopping-cart-link"]')
-
-    },
 
 
 }

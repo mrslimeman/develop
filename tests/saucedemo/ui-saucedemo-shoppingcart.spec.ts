@@ -13,14 +13,12 @@ test.beforeEach(async ({ page }) => {
 
 test.describe('Test Suite - Shopping Cart', () => {
 
-    const product_list: string[] = Object.values(TestData.product_item);
-
-    console.log(product_list)
-
-    const itemBackPack = product_list[0];
-    const itemJacket = product_list[1];
+    const itemBackPack: string = TestData.product_item.product_backpack;
+    const itemJacket: string = TestData.product_item.product_jacket;
 
     test('Validate Add item to cart', async ({ page }) => {
+
+        let backPackPrice = 0;
 
         await test.step('Add to Cart', async () => {
 
@@ -31,7 +29,7 @@ test.describe('Test Suite - Shopping Cart', () => {
 
         await test.step('Click To Cart', async () => {
 
-            await inventoryPage.btnGoToCart(page)
+            await inventoryPage.goToCart(page)
             await assertion.checkUrl(page, TestData.common_url.cartUrl);
             
         });
@@ -53,10 +51,9 @@ test.describe('Test Suite - Shopping Cart', () => {
             await cartPage.findItemAndRemove(page, itemJacket);
 
             //Check ของที่ยังอยู่
+            await cartPage.findItemNotAvailable(page, itemJacket);
             await cartPage.findItemAvilable(page, itemBackPack);
-
-            console.log("Item "+ itemJacket+ " is Removes");
-            console.log("Item "+ itemBackPack+ " is Visible");
+            backPackPrice = await cartPage.getItemPrice(page, itemBackPack);
 
             await checkOutPage.clickCheckOut(page);
 
@@ -83,6 +80,11 @@ test.describe('Test Suite - Shopping Cart', () => {
             await cartPage.itemName(page, itemBackPack);
             await cartPage.itemQuantity(page, '1', itemBackPack);
             await cartPage.findItemAvilable(page, itemBackPack);
+            await cartPage.findItemNotAvailable(page, itemJacket);
+
+            //overview - check price matches product price
+            expect(await cartPage.getItemPrice(page, itemBackPack)).toBeCloseTo(backPackPrice, 2);
+            await checkOutPage.verifySubtotal(page, backPackPrice);
 
             //Verify Section & Total
             await checkOutPage.verifyOverViewSection(page);

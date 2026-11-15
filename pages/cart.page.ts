@@ -43,6 +43,24 @@ export const cartPage = {
 
     },
 
+    async findItemNotAvailable(page: Page, product: string) {
+
+       const targetItem = page.locator('.cart_item').filter({ has: page.locator('.inventory_item_name', { hasText: product })})
+       await expect(targetItem).toHaveCount(0);
+
+    },
+
+    async getItemPrice(page: Page, product: string): Promise<number> {
+
+       const priceLocator = page.locator('.cart_item')
+         .filter({ has: page.locator('.inventory_item_name', { hasText: product })})
+         .locator('.inventory_item_price');
+       await expect(priceLocator).toBeVisible();
+       const priceText = await priceLocator.textContent();
+       return Number(priceText?.match(/[\d.]+/)?.[0] ?? 0);
+
+    },
+
     async findItemAvilable(page: Page, product: string) {
 
        const targetItem = page.locator('.cart_item').filter({ has: page.locator('.inventory_item_name', { hasText: product })})

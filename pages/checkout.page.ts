@@ -92,11 +92,21 @@ export const checkOutPage = {
       const expectedTotal = await commonPage.getNumericString(page, '[data-test="total-label"]');
 
       const actualTotal = priceSubTotal + priceTax;
-      expect(actualTotal).toBe(expectedTotal);
+      expect(actualTotal).toBeCloseTo(expectedTotal, 2);
+
+   },
+
+   async verifySubtotal(page: Page, expectedSubtotal: number){
+
+      const priceSubTotal = await commonPage.getNumericString(page, '[data-test="subtotal-label"]');
+      expect(priceSubTotal).toBeCloseTo(expectedSubtotal, 2);
 
    },
 
    async verifyOrderSuccessful(page: Page){
+
+      await this.titleCheckoutSuccess(page);
+      await assertion.checkUrl(page, TestData.common_url.checkoutUrl_complete);
 
       await assertion.isVisibled(page, '[data-test="pony-express"]')
       await assertion.isVisibled(page, '[data-test="complete-header"]')
