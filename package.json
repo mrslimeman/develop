@@ -6,7 +6,8 @@
     "test:ui": "playwright test saucedemo --ui",
     "test:noui": "playwright test --project=chromium --workers=2",
     "test:report": "playwright test --project=chromium --headed && playwright show-report",
-    "test:lastfail": "playwright test --last-failed --project=chromium --workers=2"
+    "test:lastfail": "playwright test --last-failed --project=chromium --workers=2",
+    "test:debug": "playwright test --project=chromium --debug"
   },
   "keywords": [],
   "author": "",
