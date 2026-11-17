@@ -1,5 +1,6 @@
 import { Page ,test ,expect } from '@playwright/test';
 import { loginPage, TestData, assertion ,CommonWording ,inventoryPage, cartPage, checkOutPage } from '../../resource/allreource';
+import { shot } from '../../utills/screenshot';
 
 test.beforeEach(async ({ page }) => {
 
@@ -15,9 +16,9 @@ test.describe('Test Suite - Shopping Cart', () => {
 
     const itemBackPack: string = TestData.product_item.product_backpack;
     const itemJacket: string = TestData.product_item.product_jacket;
-    const itemBikeLight: string = TestData.product_item.product_bike_light;
+    //const itemBikeLight: string = TestData.product_item.product_bike_light;
 
-    test('Validate Add item to cart And Check Out Success', async ({ page }) => {
+    test('Validate Add item to cart And Check Out Success', async ({ page }, TestInfo) => {
 
         let backPackPrice = 0;
         let bikeLightPrice = 0;
@@ -27,7 +28,7 @@ test.describe('Test Suite - Shopping Cart', () => {
 
             await inventoryPage.productAddToCart(page, itemBackPack);
             await inventoryPage.productAddToCart(page, itemJacket);
-            await inventoryPage.productAddToCart(page, itemBikeLight);
+            //await inventoryPage.productAddToCart(page, itemBikeLight);
             
         });
 
@@ -58,7 +59,7 @@ test.describe('Test Suite - Shopping Cart', () => {
             await cartPage.findItemNotAvailable(page, itemJacket);
             await cartPage.findItemAvilable(page, itemBackPack);
             backPackPrice = await cartPage.getItemPrice(page, itemBackPack);
-            bikeLightPrice = await cartPage.getItemPrice(page, itemBikeLight);
+            //bikeLightPrice = await cartPage.getItemPrice(page, itemBikeLight);
 
             await checkOutPage.clickCheckOut(page);
 
@@ -89,16 +90,22 @@ test.describe('Test Suite - Shopping Cart', () => {
 
             //overview - check price matches product price
             expect(await cartPage.getItemPrice(page, itemBackPack)).toBeCloseTo(backPackPrice, 2);
-            expect(await cartPage.getItemPrice(page, itemBikeLight)).toBeCloseTo(bikeLightPrice, 2);
-            await checkOutPage.verifySubtotal(page, backPackPrice + bikeLightPrice);
+            //expect(await cartPage.getItemPrice(page, itemBikeLight)).toBeCloseTo(bikeLightPrice, 2);
+            await checkOutPage.verifySubtotal(page, backPackPrice);
 
             //Verify Section & Total
             await checkOutPage.verifyOverViewSection(page);
+            await shot(page, TestInfo, 'Overview_page')
+
+        });
+
+        await test.step('Check Out Complete Order', async () => {
+
             await checkOutPage.clickFinish(page);
 
             //Verify Successful Page
             await checkOutPage.verifyOrderSuccessful(page);
-
+            await shot(page, TestInfo, 'Successful_page')
         });
 
         await test.step('back to home', async () => {

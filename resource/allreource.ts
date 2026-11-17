@@ -9,3 +9,4 @@ export * from '../pages/checkout.page';
 //utils
 export * from '../utills/assertion';
 export * from '../utills/yamlLoader';
+export * from '../utills/screenshot'
