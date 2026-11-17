@@ -15,6 +15,7 @@ test.describe('Test Suite - Shopping Cart', () => {
 
     const itemBackPack: string = TestData.product_item.product_backpack;
     const itemJacket: string = TestData.product_item.product_jacket;
+    const allItems: string[] = Object.values(TestData.product_item);
 
     test('Validate Add item to cart And Check Out Success', async ({ page }) => {
 
@@ -22,8 +23,9 @@ test.describe('Test Suite - Shopping Cart', () => {
 
         await test.step('Add to Cart', async () => {
 
-            await inventoryPage.productAddToCart(page, itemBackPack);
-            await inventoryPage.productAddToCart(page, itemJacket);
+            for (const item of allItems) {
+                await inventoryPage.productAddToCart(page, item);
+            }
             
         });
 
@@ -36,13 +38,12 @@ test.describe('Test Suite - Shopping Cart', () => {
 
         await test.step('Check Product Qty. and Product Name', async () => {
 
-            //Check Name
-            await cartPage.itemName(page, itemBackPack)
-            await cartPage.itemName(page, itemJacket)
-
-            //Check Quantity
-            await cartPage.itemQuantity(page, '1', itemBackPack)
-            await cartPage.itemQuantity(page, '1', itemJacket)
+            for (const item of allItems) {
+                //Check Name
+                await cartPage.itemName(page, item);
+                //Check Quantity
+                await cartPage.itemQuantity(page, '1', item);
+            }
             
         });
 
