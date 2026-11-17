@@ -1,3 +1,4 @@
+# yaml-language-server: $schema=./commonwording.schema.yaml
 common_wording:
   txt_continue: Continue
   txt_cancel: Cancel

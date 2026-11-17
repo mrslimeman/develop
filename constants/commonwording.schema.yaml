@@ -1,0 +1,35 @@
+$schema: "http://json-schema.org/draft-07/schema#"
+title: Common Wording
+description: Schema for constants/commonwording.yml
+type: object
+required: [common_wording, login_wording, inventory_wording, checkout_wording]
+properties:
+  common_wording:
+    type: object
+    additionalProperties: { type: string }
+    properties:
+      txt_continue: { type: string }
+      txt_cancel: { type: string }
+  login_wording:
+    type: object
+    additionalProperties: { type: string }
+    properties:
+      login_title: { type: string }
+      login_err_user_not_exist: { type: string }
+      login_err_username_required: { type: string }
+      login_err_password_required: { type: string }
+      login_err_lockout_user: { type: string }
+  inventory_wording:
+    type: object
+    additionalProperties: { type: string }
+    properties:
+      inventory_cart: { type: string }
+  checkout_wording:
+    type: object
+    additionalProperties: { type: string }
+    properties:
+      checkout_title: { type: string }
+      checkout_overview: { type: string }
+      checkout_complete: { type: string }
+      txt_success_msg: { type: string }
+      txt_success_desc: { type: string }
