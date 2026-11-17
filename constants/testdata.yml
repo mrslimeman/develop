@@ -18,6 +18,10 @@ user_credentials:
 product_item:
   product_backpack: 'Sauce Labs Backpack'
   product_jacket: 'Sauce Labs Fleece Jacket'
+  product_bike_light: 'Sauce Labs Bike Light'
+  product_bolt_tshirt: 'Sauce Labs Bolt T-Shirt'
+  product_onesie: 'Sauce Labs Onesie'
+  product_red_tshirt: 'Test.allTheThings() T-Shirt (Red)'
 
 
 test_userinfo_demo:
