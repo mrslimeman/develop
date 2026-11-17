@@ -1,5 +1,5 @@
 import { Page ,test ,expect } from '@playwright/test';
-import { loginPage, TestData, assertion ,CommonWording ,inventoryPage, cartPage, checkOutPage } from '../../resource/allreource';
+import { loginPage, TestData, assertion ,CommonWording ,inventoryPage, cartPage, checkOutPage, commonPage } from '../../resource/allreource';
 import { shot } from '../../utills/screenshot';
 
 test.beforeEach(async ({ page }) => {
@@ -22,6 +22,7 @@ test.describe('Test Suite - Shopping Cart', () => {
 
         let backPackPrice = 0;
         let bikeLightPrice = 0;
+        let jacketPrice = 0;
         
 
         await test.step('Add to Cart', async () => {
@@ -58,9 +59,6 @@ test.describe('Test Suite - Shopping Cart', () => {
             //Check ของที่ยังอยู่
             await cartPage.findItemNotAvailable(page, itemJacket);
             await cartPage.findItemAvilable(page, itemBackPack);
-            backPackPrice = await cartPage.getItemPrice(page, itemBackPack);
-            //bikeLightPrice = await cartPage.getItemPrice(page, itemBikeLight);
-
             await checkOutPage.clickCheckOut(page);
 
         });
@@ -74,7 +72,19 @@ test.describe('Test Suite - Shopping Cart', () => {
             await checkOutPage.inputLastName(page, TestData.test_userinfo_demo.lastname);
             await checkOutPage.inputZipCode(page, TestData.test_userinfo_demo.zipcode);
 
-            await checkOutPage.clickContinue(page);
+            await checkOutPage.clickCancel(page);
+            await commonPage.clickElement(page, '[data-test="continue-shopping"]')
+            await inventoryPage.productAddToCart(page, itemJacket);
+
+            await inventoryPage.goToCart(page)
+            await assertion.checkUrl(page, TestData.common_url.cartUrl);
+            await checkOutPage.clickCheckOut(page);
+
+            //fill - infomation
+            await checkOutPage.inputFirstName(page, TestData.test_userinfo_demo.firstname);
+            await checkOutPage.inputLastName(page, TestData.test_userinfo_demo.lastname);
+            await checkOutPage.inputZipCode(page, TestData.test_userinfo_demo.zipcode);
+            await checkOutPage.clickContinue(page); 
 
         });
 
@@ -85,17 +95,25 @@ test.describe('Test Suite - Shopping Cart', () => {
             //overview - check item & quantity
             await cartPage.itemName(page, itemBackPack);
             await cartPage.itemQuantity(page, '1', itemBackPack);
-            await cartPage.findItemAvilable(page, itemBackPack);
-            await cartPage.findItemNotAvailable(page, itemJacket);
+            await cartPage.itemName(page, itemJacket);
+            await cartPage.itemQuantity(page, '1', itemJacket);
+            //await cartPage.findItemAvilable(page, itemBackPack);
+            //await cartPage.findItemNotAvailable(page, itemJacket);
+            backPackPrice = await cartPage.getItemPrice(page, itemBackPack);
+            jacketPrice = await cartPage.getItemPrice(page, itemJacket);
+            //bikeLightPrice = await cartPage.getItemPrice(page, itemBikeLight);
 
             //overview - check price matches product price
             expect(await cartPage.getItemPrice(page, itemBackPack)).toBeCloseTo(backPackPrice, 2);
+            expect(await cartPage.getItemPrice(page, itemJacket)).toBeCloseTo(jacketPrice, 2);
             //expect(await cartPage.getItemPrice(page, itemBikeLight)).toBeCloseTo(bikeLightPrice, 2);
-            await checkOutPage.verifySubtotal(page, backPackPrice);
+            await checkOutPage.verifySubtotal(page, jacketPrice+backPackPrice);
 
             //Verify Section & Total
             await checkOutPage.verifyOverViewSection(page);
             await shot(page, TestInfo, 'Overview_page')
+
+
 
         });
 

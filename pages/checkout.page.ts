@@ -29,8 +29,8 @@ export const checkOutPage = {
    },
 
    async clickCancel(page: Page) {
+   await commonPage.clickElement(page, '[data-test="cancel"]')
 
-      await commonPage.clickElement(page, '[data-test="cancel"]')
 
    },
 
@@ -119,6 +119,9 @@ export const checkOutPage = {
 
       await assertion.hasText(page, '[data-test="complete-header"]', CommonWording.checkout_wording.txt_success_msg)
       await assertion.hasText(page, '[data-test="complete-text"]', CommonWording.checkout_wording.txt_success_desc)
+
+      console.log('success wording: '+CommonWording.checkout_wording.txt_success_desc)
+      console.log('URL: '+TestData.common_url.checkoutUrl_complete)
 
    },
 
