@@ -94,8 +94,8 @@ export const checkOutPage = {
       const actualTotal = priceSubTotal + priceTax;
       expect(actualTotal).toBeCloseTo(expectedTotal, 2);
 
-      console.log("Expected Total is: "+ expectedTotal)
-      console.log("Actual Total is: "+ actualTotal)
+      console.log("Expected Total is: "+ expectedTotal.toFixed(2))
+      console.log("Actual Total is: "+ actualTotal.toFixed(2))
 
    },
 
@@ -119,9 +119,6 @@ export const checkOutPage = {
 
       await assertion.hasText(page, '[data-test="complete-header"]', CommonWording.checkout_wording.txt_success_msg)
       await assertion.hasText(page, '[data-test="complete-text"]', CommonWording.checkout_wording.txt_success_desc)
-
-      console.log('success wording: '+CommonWording.checkout_wording.txt_success_desc)
-      console.log('URL: '+TestData.common_url.checkoutUrl_complete)
 
    },
 

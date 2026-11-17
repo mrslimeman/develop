@@ -61,6 +61,12 @@ export const cartPage = {
 
     },
 
+    async clickContinueShopping(page: Page) {
+
+       await page.locator('[data-test="continue-shopping"]').click();
+
+    },
+
     async findItemAvilable(page: Page, product: string) {
 
        const targetItem = page.locator('.cart_item').filter({ has: page.locator('.inventory_item_name', { hasText: product })})
