@@ -15,15 +15,19 @@ test.describe('Test Suite - Shopping Cart', () => {
 
     const itemBackPack: string = TestData.product_item.product_backpack;
     const itemJacket: string = TestData.product_item.product_jacket;
+    const itemBikeLight: string = TestData.product_item.product_bike_light;
 
     test('Validate Add item to cart And Check Out Success', async ({ page }) => {
 
         let backPackPrice = 0;
+        let bikeLightPrice = 0;
+        
 
         await test.step('Add to Cart', async () => {
 
             await inventoryPage.productAddToCart(page, itemBackPack);
             await inventoryPage.productAddToCart(page, itemJacket);
+            await inventoryPage.productAddToCart(page, itemBikeLight);
             
         });
 
@@ -54,6 +58,7 @@ test.describe('Test Suite - Shopping Cart', () => {
             await cartPage.findItemNotAvailable(page, itemJacket);
             await cartPage.findItemAvilable(page, itemBackPack);
             backPackPrice = await cartPage.getItemPrice(page, itemBackPack);
+            bikeLightPrice = await cartPage.getItemPrice(page, itemBikeLight);
 
             await checkOutPage.clickCheckOut(page);
 
@@ -84,7 +89,12 @@ test.describe('Test Suite - Shopping Cart', () => {
 
             //overview - check price matches product price
             expect(await cartPage.getItemPrice(page, itemBackPack)).toBeCloseTo(backPackPrice, 2);
-            await checkOutPage.verifySubtotal(page, backPackPrice);
+            expect(await cartPage.getItemPrice(page, itemBikeLight)).toBeCloseTo(bikeLightPrice, 2);
+            await checkOutPage.verifySubtotal(page, backPackPrice + bikeLightPrice);
+
+            let Totalprice = backPackPrice + backPackPrice;
+
+            console.log("Total Price is: "+Totalprice)
 
             //Verify Section & Total
             await checkOutPage.verifyOverViewSection(page);
