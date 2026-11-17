@@ -92,10 +92,6 @@ test.describe('Test Suite - Shopping Cart', () => {
             expect(await cartPage.getItemPrice(page, itemBikeLight)).toBeCloseTo(bikeLightPrice, 2);
             await checkOutPage.verifySubtotal(page, backPackPrice + bikeLightPrice);
 
-            let Totalprice = backPackPrice + bikeLightPrice;
-
-            console.log("Total Price is: "+Totalprice)
-
             //Verify Section & Total
             await checkOutPage.verifyOverViewSection(page);
             await checkOutPage.clickFinish(page);

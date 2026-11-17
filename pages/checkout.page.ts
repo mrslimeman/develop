@@ -94,6 +94,9 @@ export const checkOutPage = {
       const actualTotal = priceSubTotal + priceTax;
       expect(actualTotal).toBeCloseTo(expectedTotal, 2);
 
+      console.log("Expected Total is: "+ expectedTotal)
+      console.log("Actual Total is: "+ actualTotal)
+
    },
 
    async verifySubtotal(page: Page, expectedSubtotal: number){
