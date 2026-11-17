@@ -4,10 +4,10 @@
   "main": "index.js",
   "scripts": {
     "test:ui": "playwright test saucedemo --ui",
-    "test:noui": "playwright test --project=chromium --workers=2",
-    "test:report": "playwright test --project=chromium --headed && playwright show-report",
-    "test:lastfail": "playwright test --last-failed --project=chromium --workers=2",
-    "test:debug": "playwright test --project=chromium --debug"
+    "test:noui": "playwright test saucedemo --project=chromium --workers=2",
+    "test:report": "playwright test saucedemo --project=chromium --headed && playwright show-report",
+    "test:lastfail": "playwright test saucedemo --last-failed --project=chromium --workers=2",
+    "test:debug": "playwright test saucedemo --project=chromium --debug"
   },
   "keywords": [],
   "author": "",

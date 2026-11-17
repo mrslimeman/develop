@@ -2,7 +2,6 @@ common_wording:
   txt_continue: Continue
   txt_cancel: Cancel
 
-
 login_wording:
   login_title: 'Swag Labs'
   login_err_user_not_exist: 'Username and password do not match any user in this service'

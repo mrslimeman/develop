@@ -3,39 +3,7 @@ demo my coding: โปรเจกต์ฝึกเขียน Test Automation
 
 ## 📁 โครงสร้างโปรเจกต์
 
-```
-develop/
-├── .github/workflows/playwright.yml   # CI บน GitHub Actions
-├── constants/                         # ข้อมูลที่ใช้ในเทส (YAML)
-│   ├── testdata.yml                   # URL, user/password, ชื่อสินค้า, ข้อมูลผู้ซื้อ
-│   └── commonwording.yml              # ข้อความบนหน้าจอที่ใช้ตรวจ (title, error, success)
-├── pages/                             # Page Object: action + locator ของแต่ละหน้า
-│   ├── common.page.ts                 # action กลาง: goto, clearAndFill, clickElement, getNumericString
-│   ├── loginPages.page.ts             # หน้า Login
-│   ├── inventoryPages.page.ts         # หน้ารายการสินค้า: เพิ่มลงตะกร้า, ไปหน้าตะกร้า
-│   ├── cart.page.ts                   # หน้าตะกร้า: ชื่อ/จำนวน/ราคา, ลบสินค้า
-│   └── checkout.page.ts               # หน้า Checkout ทั้ง 3 step: กรอกข้อมูล, overview, complete
-├── resource/allreource.ts             # จุด export รวม ให้เทส import จากที่เดียว
-├── utills/
-│   ├── assertion.ts                   # assertion กลาง: checkUrl, hasText, isVisibled, loginError
-│   └── yamlLoader.ts                  # โหลด YAML เป็น TestData และ CommonWording
-├── tests/
-│   ├── saucedemo/                     # UI test ของ saucedemo (login, shopping cart + checkout)
-│   └── other/                         # API test (PokéAPI) และตัวอย่างอื่น ๆ
-├── playwright.config.ts               # ตั้งค่า Playwright (browser, reporter, video)
-└── tsconfig.json                      # module esnext + moduleResolution bundler
-```
-
 ## 🔄 Flow การทำงาน: Data → Page Object → Test
-
-```mermaid
-flowchart LR
-  A[constants/*.yml] -->|yamlLoader| B[TestData / CommonWording]
-  B --> C[pages/*.page.ts]
-  D[utills/assertion.ts] --> C
-  C -->|resource/allreource.ts| E[tests/*.spec.ts]
-  B --> E
-```
 
 1. **Data**: ข้อมูลและข้อความทั้งหมดเก็บใน `constants/*.yml` ถ้าข้อมูลเปลี่ยน แก้ที่ YAML ที่เดียว
 2. **yamlLoader**: โหลด YAML เป็น object `TestData` และ `CommonWording`

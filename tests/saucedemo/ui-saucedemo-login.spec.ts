@@ -65,8 +65,13 @@ test.describe('Test Suite - Login Success', () => {
 
         await test.step('Login And Validate Navigate to Inventory Page', async () => {
             
+            //const start = performance.now();
             await loginPage.loginSaucedemo(page, TestData.user_credentials.performance_username, TestData.user_credentials.main_password)
             await assertion.checkUrl(page, TestData.common_url.inventoryUrl);
+            //const end = performance.now();
+
+            //console.log(`Login time ${((end - start) / 1000).toFixed(2)}s`);
+
         });
     });
 
